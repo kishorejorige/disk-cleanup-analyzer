@@ -1,0 +1,25 @@
+{
+  "scan_root": "/mnt/e/dev/projects/disk_cleanup_analyzer",
+  "output_csv": "reports/disk_report.csv",
+  "output_html": "reports/disk_report.html",
+
+  "excluded_paths": [
+    "$Recycle.Bin",
+    "System Volume Information"
+  ],
+
+  "excluded_extensions": [
+    ".dll",
+    ".sys"
+  ],
+
+  "min_file_size_mb": 10,
+  "min_age_days": 0,
+
+  "max_workers": 8,
+
+  "enable_duplicate_detection": false,
+  "enable_folder_analysis": true,
+
+  "top_n_files": 100
+}

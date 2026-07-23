@@ -1,0 +1,81 @@
+from pathlib import Path
+
+
+def generate_html_report(
+    records: list[dict],
+    output_file: str | Path,
+) -> None:
+    """Generate an HTML report of the scanned files, sorted by size descending."""
+    out_path = Path(output_file)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    rows = ""
+    sorted_records = sorted(
+        records,
+        key=lambda x: x.get("size_bytes", 0),
+        reverse=True,
+    )
+
+    for record in sorted_records:
+        rows += f"""
+        <tr>
+            <td>{record['path']}</td>
+            <td>{record.get('size_bytes', 0)}</td>
+            <td>{record['last_modified']}</td>
+        </tr>
+        """
+
+    html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Disk Cleanup Report</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+        }}
+        h1 {{
+            color: #343a40;
+        }}
+        table {{
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        th, td {{
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }}
+        th {{
+            background-color: #007bff;
+            color: white;
+        }}
+        tr:hover {{
+            background-color: #f1f3f5;
+        }}
+    </style>
+</head>
+<body>
+    <h1>Disk Cleanup Analyzer Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Path</th>
+                <th>Size (Bytes)</th>
+                <th>Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+            {rows}
+        </tbody>
+    </table>
+</body>
+</html>
+"""
+
+    with open(out_path, "w", encoding="utf-8") as file:
+        file.write(html)

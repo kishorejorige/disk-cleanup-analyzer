@@ -1,0 +1,58 @@
+[project]
+name = "disk-cleanup-analyzer"
+version = "0.1.0"
+description = "A lightweight, read-only local storage and file analyzer with duplicate detection and HTML reporting."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Kishore Kumar" }
+]
+license = { text = "MIT" }
+dependencies = [
+    "tqdm>=4.66.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.22",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "A",    # flake8-builtins
+    "C4",   # flake8-comprehensions
+    "T20",  # flake8-print
+    "PT",   # flake8-pytest-style
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "PTH",  # flake8-use-pathlib
+    "RUF",  # Ruff-specific rules
+]
+ignore = [
+    "D",     # We will write our docstrings, but don't need excessive docstring linters
+    "A003",  # Class attribute shadowing
+    "PTH123", # Allow standard open()
+    "E501",   # Allow longer line lengths for comments and docstrings
+    "T201",   # Allow print statements in a CLI tool
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --tb=short"
+testpaths = [
+    "tests",
+]
+pythonpath = ["."]
+
