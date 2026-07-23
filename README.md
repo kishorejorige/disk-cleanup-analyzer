@@ -223,6 +223,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-**Kishore**
+**Kishore Kumar**
 *Python Developer*
 - GitHub: [https://github.com/kishorejorige](https://github.com/kishorejorige)
